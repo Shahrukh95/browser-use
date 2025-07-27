@@ -1,8 +1,7 @@
 from Classes import WebDriver
 
 def main():
-    driver_obj = WebDriver()
-    driver = driver_obj.get_driver()
+    driver = WebDriver()
     driver.get("https://www.example.com")
 
     input("Press Enter to close the browser...")
