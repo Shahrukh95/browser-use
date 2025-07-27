@@ -12,7 +12,7 @@ class WebDriver():
         self.__chrome_options.add_argument(f"user-data-dir={unique_dir}")
         # self.__chrome_options.add_argument("profile-directory=Default")
         
-        # Required for running in docker
+        # Docker optimizations
         self.__chrome_options.add_argument("--no-sandbox")
         self.__chrome_options.add_argument("--disable-dev-shm-usage")  # Prevent shared memory issues. Also required in docker because shared memory is 64mb only in docker.
 
@@ -20,10 +20,6 @@ class WebDriver():
         self.__chrome_options.add_argument('--window-size=1920,1080')
         # self.__chrome_options.add_argument("--incognito")
         self.__chrome_options.add_argument("--log-level=3")
-
-        # Disable GPU
-        # self.__chrome_options.add_argument("--disable-gpu")  # Disables GPU acceleration
-        # self.__chrome_options.add_argument("--disable-software-rasterizer")  # Further prevents GPU issues
         self.__chrome_options.add_argument("--enable-webgl")
 
         self.__driver = None
