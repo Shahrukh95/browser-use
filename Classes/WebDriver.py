@@ -38,7 +38,7 @@ class WebDriver():
     def get(self, url):
         """Navigate to URL"""
         self._ensure_driver()
-        print(f"Navigating to {url}")
+        # print(f"Navigating to {url}")
         return self.__driver.get(url)
     
     def quit(self):
