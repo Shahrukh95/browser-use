@@ -1,4 +1,4 @@
-from Classes.Selenium import Selenium
+from Classes.WebDriver import WebDriver
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException, WebDriverException
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
@@ -9,7 +9,7 @@ import tiktoken
 from openpyxl.utils.escape import escape
 
 
-class LinkWorker(Selenium):
+class LinkWorker(WebDriver):
     MAX_TIME_SECONDS = 10
 
     def __init__(self):

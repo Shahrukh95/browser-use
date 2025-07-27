@@ -1,3 +1,3 @@
 from .LinkWorker import LinkWorker
-from .Selenium import Selenium
+from .WebDriver import WebDriver
 from .WebScraper import WebScraper
