@@ -1,4 +1,4 @@
-from Classes.LinkProcessor import LinkProcessor
+from classes.processors.link_processor import LinkProcessor
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException, WebDriverException
 from selenium.webdriver.common.by import By

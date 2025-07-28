@@ -5,7 +5,7 @@ import os
 # Add the parent directory to the path to import Classes
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from Classes.LinkProcessor import LinkProcessor
+from classes.processors.link_processor import LinkProcessor
 
 
 @pytest.fixture

@@ -2,9 +2,7 @@ from urllib.parse import urlparse, urlunparse
 
 
 class LinkProcessor():
-    def __init__(self):
-        pass
-
+    
     @staticmethod
     def clean_url(url: str) -> str:
         """Clean and normalize the URL"""
@@ -43,11 +41,11 @@ class LinkProcessor():
             raise ValueError(f"Failed to parse URL '{url}': {e}")
 
 
-    @staticmethod
-    def toggle_www(url: str) -> str:
+    @classmethod
+    def toggle_www(cls, url: str) -> str:
         """Toggle 'www.' in the URL. Cleans the URL first."""
 
-        url = LinkProcessor.clean_url(url)
+        url = cls.clean_url(url)
 
         if not url or not isinstance(url, str):
             raise ValueError("URL must be a non-empty string")
