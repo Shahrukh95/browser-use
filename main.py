@@ -1,4 +1,4 @@
-from classes import WebDriver, LinkProcessor, SoupParser, WebFetch
+from classes import LinkProcessor, SoupParser, WebFetch
 import pandas as pd
 import logging
 
@@ -17,7 +17,7 @@ def main():
 
     web_data = WebFetch.fetch_url(cleaned_url)
     if web_data:
-        print(f"Final URL: {web_data['final_url']}")
+        logging.info(f"Final URL: {web_data['final_url']}")
         logging.info(f"Status Code: {web_data['status_code']}")
         # print(f"Content Preview: {web_data['html_content'][:100]}...")
 
@@ -25,12 +25,9 @@ def main():
         content = SoupParser.get_content(web_data['html_content'])
         title = SoupParser.get_title(web_data['html_content'])
 
-        print(f"Page Title: {title}")
-        print(f"Page Content: {content[:100]}...")
-        print("Content length:", len(content))
-        
-            
-    
+        logging.info(f"Page Title: {title}")
+        logging.info(f"Page Content: {content[:100]}...")
+        logging.info(f"Content length: {len(content)}")
 
 
 if __name__ == "__main__":
