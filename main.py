@@ -12,14 +12,15 @@ logging.basicConfig(
 def main():
 
     link_processor = LinkProcessor()
-    url = "google.com"
+    url = "example.com/search?q=python+programming"
     cleaned_url = link_processor.clean_url(url)
 
     web_data = WebFetch.fetch_url(cleaned_url)
     if web_data:
         logging.info(f"Final URL: {web_data['final_url']}")
+        logging.info(f"Toggled URL: {link_processor.toggle_www(web_data['final_url'])}")
         logging.info(f"Status Code: {web_data['status_code']}")
-        # print(f"Content Preview: {web_data['html_content'][:100]}...")
+        # logging.info(f"Content Preview: {web_data['html_content'][:100]}...")
 
         # Example usage of SoupParser
         content = SoupParser.get_content(web_data['html_content'])

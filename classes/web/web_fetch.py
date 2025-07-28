@@ -31,6 +31,5 @@ class WebFetch:
         
         except requests.RequestException as e:
             logging.error(f"Error fetching {url}: {e}")
-            # print(f"Error fetching {url}: {e}")
             return None
     

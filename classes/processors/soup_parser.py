@@ -29,7 +29,7 @@ class SoupParser:
     def get_title(html_content: str) -> str:
         """Extract the title from HTML content."""
         soup = SoupParser._create_soup(html_content)
-        title = soup.title.string if soup.title else 'No Title Found'
+        title = soup.title.string.strip() if soup.title else 'No Title Found'
         return title
     
     

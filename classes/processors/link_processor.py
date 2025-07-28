@@ -49,12 +49,13 @@ class LinkProcessor():
 
         if not url or not isinstance(url, str):
             raise ValueError("URL must be a non-empty string")
-
-        if "www." in url:
-            return url.replace("www.", "", 1)  # Remove 'www.' only once
-        else:
-            parts = url.split("://")
-            if len(parts) == 2:
-                return f"{parts[0]}://www.{parts[1]}"  # Add 'www.'
         
-        return f"www.{url}"
+        parsed_url = urlparse(url)
+
+        if "www." in parsed_url.netloc:
+            return urlunparse((parsed_url.scheme, parsed_url.netloc.replace("www.", "", 1), parsed_url.path, '', '', ''))
+        else:
+            return urlunparse((parsed_url.scheme, f"www.{parsed_url.netloc}", parsed_url.path, '', '', ''))
+
+        
+
