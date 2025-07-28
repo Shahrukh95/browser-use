@@ -1,7 +1,8 @@
-from Classes import WebDriver, LinkProcessor
+from Classes import WebDriver, LinkProcessor, SoupParser, WebFetch
 import pandas as pd
 
 def main():
+    # Example usage of WebDriver and LinkProcessor
     # url = "https://192.168.1.1/path"
     # # driver = WebDriver()
     # link_processor = LinkProcessor()
@@ -14,24 +15,41 @@ def main():
     # input("Press Enter to close the browser...")
     # # driver.quit()
 
-    driver = WebDriver()
-    link_processor = LinkProcessor()
 
-    df_startups = pd.read_csv("startups.csv")
-    for index, row in df_startups.head(1).iterrows():
-        url = row['Website']
-        cleaned_url = link_processor.clean_url(url)
-        print(f"Cleaned URL: {cleaned_url}")
+    # Example usage of WebDriver with a DataFrame
+    # driver = WebDriver()
+    # link_processor = LinkProcessor()
 
-        try:
-            driver.get(cleaned_url)
-        except Exception as e:
-            print(f"Error: Failed to navigate to {cleaned_url}")
-            continue
+    # df_startups = pd.read_csv("startups.csv")
+    # for index, row in df_startups.head(1).iterrows():
+    #     url = row['Website']
+    #     cleaned_url = link_processor.clean_url(url)
+    #     print(f"Cleaned URL: {cleaned_url}")
 
-        # driver.get(cleaned_url)
-        # input("Press Enter to close the browser...")
-    driver.quit()
+    #     try:
+    #         driver.get(cleaned_url)
+    #     except Exception as e:
+    #         print(f"Error: Failed to navigate to {cleaned_url}")
+    #         continue
+
+    #     # driver.get(cleaned_url)
+    #     # input("Press Enter to close the browser...")
+    # driver.quit()
+
+
+    web_data = WebFetch.fetch_url("https://www.example.com")
+    if web_data:
+        print(f"Final URL: {web_data['final_url']}")
+        print(f"Status Code: {web_data['status_code']}")
+        print(f"Content Preview: {web_data['html_content'][:100]}...")  # Print first 100 characters of content
+
+        # Example usage of SoupParser
+        content = SoupParser.get_content(web_data['html_content'])
+        title = SoupParser.get_title(web_data['html_content'])
+
+        print(f"Page Title: {title}")
+        print(f"Page Content: {content}...")
+        print("Content length:", len(content))
         
             
     
