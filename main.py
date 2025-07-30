@@ -1,4 +1,4 @@
-from classes import LinkProcessor, SoupParser, WebFetch
+from classes import LinkProcessor, SoupParser, WebFetch, Models
 import pandas as pd
 import logging
 
@@ -12,23 +12,30 @@ logging.basicConfig(
 def main():
 
     link_processor = LinkProcessor()
-    url = "example.com/search?q=python+programming"
+    models = Models()
+
+    url = "https://www.fsgu-akademie.de/"
     cleaned_url = link_processor.clean_url(url)
 
     web_data = WebFetch.fetch_url(cleaned_url)
     if web_data:
         logging.info(f"Final URL: {web_data['final_url']}")
-        logging.info(f"Toggled URL: {link_processor.toggle_www(web_data['final_url'])}")
+        # logging.info(f"Toggled URL: {link_processor.toggle_www(web_data['final_url'])}")
         logging.info(f"Status Code: {web_data['status_code']}")
         # logging.info(f"Content Preview: {web_data['html_content'][:100]}...")
 
         # Example usage of SoupParser
         content = SoupParser.get_content(web_data['html_content'])
-        title = SoupParser.get_title(web_data['html_content'])
 
-        logging.info(f"Page Title: {title}")
         logging.info(f"Page Content: {content[:100]}...")
         logging.info(f"Content length: {len(content)}")
+
+        # Example usage of OpenAI model
+        response, input_tokens, output_tokens = models.openai_model("gpt-4o-mini", f"In english, summarize the content of {content}")
+
+        logging.info(f"OpenAI Model Response: {response}")
+        logging.info(f"Input Tokens: {input_tokens}")
+        logging.info(f"Output Tokens: {output_tokens}")
 
 
 if __name__ == "__main__":

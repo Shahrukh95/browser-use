@@ -1,13 +1,15 @@
 from urllib.parse import urlparse, urlunparse
-
+import logging
 
 class LinkProcessor():
+    """A class to process and clean URLs."""
     
     @staticmethod
     def clean_url(url: str) -> str:
         """Clean and normalize the URL"""
 
         if not url or not isinstance(url, str):
+            logging.error("URL must be a non-empty string")
             raise ValueError("URL must be a non-empty string")
         
         url = url.strip()
@@ -38,6 +40,7 @@ class LinkProcessor():
             return cleaned_url
 
         except Exception as e:
+            logging.error(f"Failed to parse URL '{url}': {e}")
             raise ValueError(f"Failed to parse URL '{url}': {e}")
 
 
@@ -57,5 +60,5 @@ class LinkProcessor():
         else:
             return urlunparse((parsed_url.scheme, f"www.{parsed_url.netloc}", parsed_url.path, '', '', ''))
 
-        
+
 

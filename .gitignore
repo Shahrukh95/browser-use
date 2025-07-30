@@ -2,8 +2,8 @@ env
 
 **/__pycache__/
 .pytest_cache/
+.github/
 
 *.csv
 *.log
-copilot-instructions.md
 test.ipynb
