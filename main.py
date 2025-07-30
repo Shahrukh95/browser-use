@@ -13,6 +13,7 @@ def main():
 
     link_processor = LinkProcessor()
     models = Models()
+    
 
     url = "https://www.fsgu-akademie.de/"
     cleaned_url = link_processor.clean_url(url)
@@ -31,11 +32,12 @@ def main():
         logging.info(f"Content length: {len(content)}")
 
         # Example usage of OpenAI model
-        response, input_tokens, output_tokens = models.openai_model("gpt-4o-mini", f"In english, summarize the content of {content}")
+        response, input_tokens, output_tokens, total_cost = models.openai_model("gpt-4.1-mini", f"In english, summarize the content of {content}")
 
         logging.info(f"OpenAI Model Response: {response}")
         logging.info(f"Input Tokens: {input_tokens}")
         logging.info(f"Output Tokens: {output_tokens}")
+        logging.info(f"Total Cost: {total_cost}")
 
 
 if __name__ == "__main__":
