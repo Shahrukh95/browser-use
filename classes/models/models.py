@@ -30,12 +30,8 @@ class Models:
             output_tokens = completion.usage.completion_tokens
             total_cost = ModelPricing.calculate_cost(model_name, input_tokens, output_tokens)
 
-            # logging.info(f"OpenAI API called with model: {model_name}, "
-            # f"Input tokens: {input_tokens}, "
-            # f"Output tokens: {output_tokens}, "
-            # f"Total cost: {total_cost}")
-
             return response, input_tokens, output_tokens, total_cost
+        
         except Exception as e:
             logging.error(f"OpenAI API error occurred in function openai_model: {str(e)}")
             return f"OpenAI API error occurred", 0, 0, float(0)

@@ -31,7 +31,7 @@ class LinkProcessor():
             
             # There should be a . in the netloc or it should be an IP address
             if ('.' not in parsed_url.netloc and
-            not parsed_url.netloc.replace('.', '').isdigit()):
+            not parsed_url.netloc.replace('.', '').replace(':', '').isdigit()):
                 raise ValueError(f"Invalid domain in URL: {url}")
 
             # Rebuild the URL without query and fragment
@@ -49,16 +49,15 @@ class LinkProcessor():
         """Toggle 'www.' in the URL. Cleans the URL first."""
 
         url = cls.clean_url(url)
-
-        if not url or not isinstance(url, str):
-            raise ValueError("URL must be a non-empty string")
         
         parsed_url = urlparse(url)
 
         if "www." in parsed_url.netloc:
-            return urlunparse((parsed_url.scheme, parsed_url.netloc.replace("www.", "", 1), parsed_url.path, '', '', ''))
+            new_netloc = parsed_url.netloc.replace("www.", "", 1)
         else:
-            return urlunparse((parsed_url.scheme, f"www.{parsed_url.netloc}", parsed_url.path, '', '', ''))
+            new_netloc = f"www.{parsed_url.netloc}"
+
+        return urlunparse((parsed_url.scheme, new_netloc, parsed_url.path, '', '', ''))
 
 
 

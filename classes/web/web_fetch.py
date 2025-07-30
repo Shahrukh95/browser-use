@@ -1,6 +1,13 @@
 import requests
-from typing import Optional
+from typing import Optional, TypedDict
 import logging
+
+
+class FetchResult(TypedDict):    
+    final_url: Optional[str]
+    status_code: Optional[int]
+    html_content: Optional[str]
+    success: bool
 
 
 class WebFetch:
@@ -12,24 +19,33 @@ class WebFetch:
     }
     
     @classmethod
-    def fetch_url(cls, url:str) -> Optional[dict]:
+    def fetch_url(cls, url: str) -> FetchResult:
         """Fetch the content of the URL and return the final URL, status code, and content."""
         
         if not url or not isinstance(url, str):
             logging.error("URL must be a non-empty string")
-            return None
+            return {
+                'final_url': None,
+                'status_code': None,
+                'html_content': None,
+                'success': False
+            }
 
         try:
             response = requests.get(url, timeout=cls.DEFAULT_TIMEOUT, headers=cls.DEFAULT_HEADERS)
-            response.raise_for_status()  # Raise an error for bad responses
             
             return {
                 'final_url': response.url,
                 'status_code': response.status_code,
-                'html_content': response.text
+                'html_content': response.text,
+                'success': response.ok
             }
         
         except requests.RequestException as e:
             logging.error(f"Error fetching {url}: {e}")
-            return None
-    
+            return {
+                'final_url': url,
+                'status_code': None,
+                'html_content': None,
+                'success': False
+            }

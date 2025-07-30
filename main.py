@@ -15,7 +15,7 @@ def main():
     models = Models()
     
 
-    url = "https://www.fsgu-akademie.de/"
+    url = "https://www.asdasdas123123was.com/"
     cleaned_url = link_processor.clean_url(url)
 
     web_data = WebFetch.fetch_url(cleaned_url)
@@ -25,10 +25,10 @@ def main():
         logging.info(f"Status Code: {web_data['status_code']}")
         # logging.info(f"Content Preview: {web_data['html_content'][:100]}...")
 
-        # Example usage of SoupParser
+        # Get web page content
         content = SoupParser.get_content(web_data['html_content'])
 
-        logging.info(f"Page Content: {content[:100]}...")
+        logging.info(f"Page Content: {content[:100]}")
         logging.info(f"Content length: {len(content)}")
 
         # Example usage of OpenAI model
