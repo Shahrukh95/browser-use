@@ -6,4 +6,6 @@ env
 
 *.csv
 *.log
+*.env
+
 test.ipynb
