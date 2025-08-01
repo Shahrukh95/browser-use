@@ -1,4 +1,5 @@
 from classes import LinkProcessor, SoupParser, WebFetch, Models
+from classes.services.website_ai_analyzer import WebsiteAIAnalyzer
 import pandas as pd
 import logging
 
@@ -10,34 +11,13 @@ logging.basicConfig(
 )
 
 def main():
+    analyzer = WebsiteAIAnalyzer()
 
-    link_processor = LinkProcessor()
-    models = Models()
-    
+    # Analyze a sample URL
+    url = "https://asdasdasd123123asd1111.com"
+    result = analyzer.analyze_url(url=url, model_name="gpt-4.1-mini")
 
-    url = "https://www.asdasdas123123was.com/"
-    cleaned_url = link_processor.clean_url(url)
-
-    web_data = WebFetch.fetch_url(cleaned_url)
-    if web_data:
-        logging.info(f"Final URL: {web_data['final_url']}")
-        # logging.info(f"Toggled URL: {link_processor.toggle_www(web_data['final_url'])}")
-        logging.info(f"Status Code: {web_data['status_code']}")
-        # logging.info(f"Content Preview: {web_data['html_content'][:100]}...")
-
-        # Get web page content
-        content = SoupParser.get_content(web_data['html_content'])
-
-        logging.info(f"Page Content: {content[:100]}")
-        logging.info(f"Content length: {len(content)}")
-
-        # Example usage of OpenAI model
-        response, input_tokens, output_tokens, total_cost = models.openai_model("gpt-4.1-mini", f"In english, summarize the content of {content}")
-
-        logging.info(f"OpenAI Model Response: {response}")
-        logging.info(f"Input Tokens: {input_tokens}")
-        logging.info(f"Output Tokens: {output_tokens}")
-        logging.info(f"Total Cost: {total_cost}")
+    logging.info(f"Analysis Result: {result.model_dump()}")
 
 
 if __name__ == "__main__":
