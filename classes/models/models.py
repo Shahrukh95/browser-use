@@ -15,7 +15,7 @@ class Models:
     def openai_model(cls, model_name: str, message: str) -> tuple[str, int, int, float]:
         """Uses OpenAI's *Chat Completions* API to generate a response based on the provided model and message."""
         try:
-            client = OpenAI(api_key=os.getenv("WORK_OPENAI_API_KEY"))
+            client = OpenAI(api_key=os.getenv("CUSTOM_OPENAI_API_KEY"))
             completion = client.chat.completions.create(
                 model=model_name,
                 messages=[
