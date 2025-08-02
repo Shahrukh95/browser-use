@@ -67,6 +67,9 @@ class WebsiteAIAnalyzer:
 
                 if web_data['success'] is False:
                     logging.error(f"Failed to fetch {cleaned_url} even after toggling www.")
+                    # When toggling 'www.' fails, toggle it back to the original cleaned URL
+                    cleaned_url = self.link_processor.toggle_www(cleaned_url)
+                    logging.warning(f"Reverted to original cleaned URL: {cleaned_url}")
                 else:
                     logging.info(f"Successfully fetched {cleaned_url} after toggling www.")
 
@@ -82,7 +85,7 @@ class WebsiteAIAnalyzer:
             # Step 2: Use OpenAI model to analyze content
             model_response, input_tokens, output_tokens, total_cost = self.models.openai_model(
                 model_name,
-                f"The following is the page content of a website. Check if this is an AI startup or not. Finish your answer with ##### Is AI Startup: [Yes/No]\n\n\n{text_content}"
+                f"The following is the page content of a website. Check if this is an AI startup or not, and provide a justification. Finish your answer with ##### Is AI Startup: [Yes/No]\n\n\n{text_content}"
             )
 
             # Step 3: Extract answer from model response

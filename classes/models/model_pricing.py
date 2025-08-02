@@ -5,7 +5,8 @@ class ModelPricing:
     
     # Pricing per 1M tokens (input, output)
     MODEL_PRICES = {
-        "gpt-4.1-mini": (0.40, 1.60)
+        "gpt-4.1-mini": (0.40, 1.60),
+        "o3": (2.00, 8.00),
     }
     
     @classmethod
