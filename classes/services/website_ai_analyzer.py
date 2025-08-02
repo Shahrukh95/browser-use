@@ -123,7 +123,7 @@ class WebsiteAIAnalyzer:
         
         df = pd.read_csv(input_csv)
 
-        with open(output_csv, 'w', newline='', encoding='utf-8') as file:
+        with open(output_csv, 'w', newline='', encoding='utf-8-sig') as file:
             writer = csv.writer(file, quoting=csv.QUOTE_ALL)
 
             if file.tell() == 0:

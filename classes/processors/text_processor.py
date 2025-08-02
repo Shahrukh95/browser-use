@@ -36,12 +36,12 @@ class TextProcessor:
             return "Unknown"
 
 
-
-    def csv_text_sanitizer(self, text: str) -> str:
+    @staticmethod
+    def csv_text_sanitizer(text: str) -> str:
         """Sanitizes text for CSV output by replacing problematic characters."""
 
         try:
-            sanitized_text = text.replace('\n', ' ').replace('\r', '').replace('\t', ' ').strip()
+            sanitized_text = text.replace('\r', '').replace('\t', ' ').strip()
             return sanitized_text
         except Exception as e:
             logging.error(f"Failed to sanitize text for CSV: {e}")
