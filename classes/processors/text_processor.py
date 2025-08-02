@@ -3,6 +3,7 @@ import logging
 from typing import List
 
 class TextProcessor:
+
     @staticmethod
     def extract_answer_from_text(searchable_text: str, question: str, valid_answers: List[str]) -> str:
         """Extracts an answer from a text that is in the format:
@@ -33,3 +34,15 @@ class TextProcessor:
         except Exception as e:
             logging.error(f"Failed to extract answer for question '{question}': {e}")
             return "Unknown"
+
+
+
+    def csv_text_sanitizer(self, text: str) -> str:
+        """Sanitizes text for CSV output by replacing problematic characters."""
+
+        try:
+            sanitized_text = text.replace('\n', ' ').replace('\r', '').replace('\t', ' ').strip()
+            return sanitized_text
+        except Exception as e:
+            logging.error(f"Failed to sanitize text for CSV: {e}")
+            return text

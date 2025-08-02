@@ -128,6 +128,8 @@ class WebsiteAIAnalyzer:
 
             if file.tell() == 0:
                 writer.writerow(["Name", "Original URL", "Cleaned URL", "Status Code", "Page Load Success", "Model Response", "Extracted Answer", "Input Tokens", "Output Tokens", "Total Cost"])
+                file.flush()
+
             for index, row in df.iterrows():
                 if index < start_index:
                     continue
@@ -136,4 +138,17 @@ class WebsiteAIAnalyzer:
                 
                 url = row['Website']
                 result = self.analyze_url(url, model_name, index=index + 1)
-                writer.writerow([row['Startup name'], result.url, result.cleaned_url, result.status_code, result.page_load_success, result.model_response, result.extracted_answer, result.input_tokens, result.output_tokens, result.total_cost])
+
+                writer.writerow([
+                    self.text_processor.csv_text_sanitizer(str(row.get('Startup name'))),
+                    self.text_processor.csv_text_sanitizer(result.url),
+                    self.text_processor.csv_text_sanitizer(result.cleaned_url),
+                    str(result.status_code),
+                    str(result.page_load_success),
+                    self.text_processor.csv_text_sanitizer(result.model_response),
+                    self.text_processor.csv_text_sanitizer(result.extracted_answer),
+                    str(result.input_tokens),
+                    str(result.output_tokens),
+                    str(result.total_cost)
+                ])
+                file.flush()

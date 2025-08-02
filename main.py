@@ -13,8 +13,10 @@ logging.basicConfig(
 def main():
     analyzer = WebsiteAIAnalyzer()
 
+    analyzer.analyze_url("https://www.example.com/","gpt-4.1-mini")
+
     # analysize input URLs
-    analyzer.analyze_urls("startups.csv", "output.csv", 15, 19, "gpt-4.1-mini")
+    # analyzer.analyze_urls("startups.csv", "output.csv", 16, 17, "gpt-4.1-mini")
     
     # logging.info(f"Analysis Result: {result.model_dump()}")
 
