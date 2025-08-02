@@ -1,7 +1,7 @@
 from urllib.parse import urlparse, urlunparse
 import logging
 
-class LinkProcessor():
+class LinkProcessor:
     """A class to process and clean URLs."""
     
     @staticmethod
@@ -35,7 +35,14 @@ class LinkProcessor():
                 raise ValueError(f"Invalid domain in URL: {url}")
 
             # Rebuild the URL without query and fragment
-            cleaned_url = urlunparse((parsed_url.scheme, parsed_url.netloc, parsed_url.path, '', '', ''))
+            cleaned_url = urlunparse((
+                parsed_url.scheme, 
+                parsed_url.netloc, 
+                parsed_url.path or '/', 
+                '', 
+                '', 
+                ''
+            ))
 
             return cleaned_url
 

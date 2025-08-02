@@ -16,7 +16,7 @@ def main():
     # analyzer.analyze_url("https://www.example.com/","gpt-4.1-mini")
 
     # analysize input URLs
-    analyzer.analyze_urls("startups.csv", "output.csv", 9, 10, "gpt-4.1-mini")
+    analyzer.analyze_urls("startups.csv", "output.csv", 40, 44, "gpt-4.1-mini")
     
     # logging.info(f"Analysis Result: {result.model_dump()}")
 
