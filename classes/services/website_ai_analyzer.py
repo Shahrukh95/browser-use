@@ -54,8 +54,8 @@ class WebsiteAIAnalyzer:
         
         try:
             # Step 1: Clean and fetch the URL
+            logging.info(f"Analyzing URL {index}: {url}")
             cleaned_url = self.link_processor.clean_url(url)
-            logging.info(f"{index}) Cleaned URL: {cleaned_url}")
             web_data = self.web_fetch.fetch_url(cleaned_url)
 
             # If fetch was unsuccessful, try toggling 'www.' prefix
